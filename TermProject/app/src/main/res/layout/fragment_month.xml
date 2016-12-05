@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical"
+    android:background="@color/color_b6c7cf">
+
+    <LinearLayout
+        android:id="@+id/selectmonth"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+
+        android:background="@color/color_5" android:padding="5dp">
+
+
+        <TextView android:text=""
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="22dip"
+            android:gravity="center"
+            android:layout_weight="90" />
+
+
+
+
+    </LinearLayout>
+
+    <GridView
+        android:layout_marginTop="30dp"
+        android:id="@+id/gridview"
+        android:layout_weight="1"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:numColumns="7"
+        android:background="@color/color_b6c7cf">
+
+    </GridView>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal|center_vertical"
+
+        android:padding="5dp" >
+
+        <ImageButton android:id="@+id/btn_calendar_prevmonth"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10px"
+            android:background="@color/color_b6c7cf"
+            android:src="@drawable/ic_fast_rewind_white_24dp"/>
+
+        <TextView android:text=""
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#FFFFFF"
+            android:textStyle="bold"
+            android:textSize="20dip"
+            android:gravity="center"
+            android:layout_weight="6" />
+
+        <ImageButton android:id="@+id/btn_calendar_nextmonth"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="10px"
+            android:background="@color/color_b6c7cf"
+            android:src="@drawable/ic_fast_forward_white_24dp"/>
+    </LinearLayout>
+
+
+</LinearLayout>
