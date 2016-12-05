@@ -122,9 +122,7 @@ public class DayFragment extends Fragment implements View.OnClickListener {
                     //startActivity(new Intent(getActivity(), View_scheduleActivity.class));
                     Intent intent = new Intent(getActivity(), View_scheduleActivity.class);
                     intent.putExtra("ParamDate", day);
-                    intent.putExtra("year", chekedyear);
-                    intent.putExtra("month", chekedmonth);
-                    intent.putExtra("day", chekedday);
+
                     intent.putExtra("time", chekedtime);
                     startActivity(intent);
                 }

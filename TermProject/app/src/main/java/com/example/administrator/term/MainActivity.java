@@ -26,14 +26,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        startActivity(new Intent(this, Splash.class));
-        Handler mHandler = new Handler();
 
-        mHandler.postDelayed(new Runnable()  {
-            public void run() {
-                checkDangerousPermissions();
-            }
-        }, 3000);
+
+        checkDangerousPermissions();
+
         fragmentTransaction.replace(R.id.fragment, new MonthFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
@@ -114,4 +110,5 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, permissions, 1);
         }
     }
+
 }

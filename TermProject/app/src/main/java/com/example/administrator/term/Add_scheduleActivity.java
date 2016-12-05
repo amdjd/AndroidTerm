@@ -263,6 +263,7 @@ public class Add_scheduleActivity extends AppCompatActivity implements OnClickLi
                     intent.putExtra("ParamID", mId);
                     intent.putExtra("ParamDate", textDate.getText().toString());
                     intent.putExtra("time", textTime.getText().toString());
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                     startActivity(intent);
                 }
                 break;
@@ -589,14 +590,6 @@ public class Add_scheduleActivity extends AppCompatActivity implements OnClickLi
             }
         }
         file.delete();    //root 삭제
-    }
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        switch (keyCode) {
-            case KeyEvent.KEYCODE_BACK:
-                return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
 }

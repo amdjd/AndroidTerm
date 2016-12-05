@@ -20,10 +20,9 @@ import android.widget.TextView;
 public class View_scheduleActivity extends AppCompatActivity implements OnItemClickListener,
         OnClickListener{
     MyDBHelper mDBHelper;
-    String year;
-    String month;
-    String day;
-    String today,today2, time;
+
+
+    String today,today2,mday,time;
     Cursor cursor;
     SimpleCursorAdapter adapter;
     SimpleCursorAdapter adapter2;
@@ -36,16 +35,14 @@ public class View_scheduleActivity extends AppCompatActivity implements OnItemCl
         setContentView(R.layout.activity_view_schedule);
 
         Intent intent = getIntent();
-        year = intent.getStringExtra("year");
-        month = intent.getStringExtra("month");
-        day = intent.getStringExtra("day");
+        mday = intent.getStringExtra("ParamDate");
         time = intent.getStringExtra("time");
 
         mDBHelper = new MyDBHelper(this, "Today.db", null, 1);
         SQLiteDatabase db = mDBHelper.getWritableDatabase();
-        today = year + "/" + month + "/" + day;
+        today = mday;
         if(time != null){
-            today2 = year + "/" + month + "/" + day +"/"+ time +"시";
+            today2 =mday +"/"+ time +"시";
             TextView text = (TextView) findViewById(R.id.texttoday);
             text.setText(today2);
             cursor = db.rawQuery(
@@ -69,7 +66,9 @@ public class View_scheduleActivity extends AppCompatActivity implements OnItemCl
         mDBHelper.close();
 
         Button btn = (Button) findViewById(R.id.btnadd);
+        Button btn2 = (Button) findViewById(R.id.btnc);
         btn.setOnClickListener(this);
+        btn2.setOnClickListener(this);
     }
 
     @Override
@@ -86,13 +85,19 @@ public class View_scheduleActivity extends AppCompatActivity implements OnItemCl
     @Override
     public void onClick(View v) {
         // TODO Auto-generated method stub
-        Intent intent = new Intent(this, Add_scheduleActivity.class);
-        intent.putExtra("ParamDate", today);
-        intent.putExtra("year",year);
-        intent.putExtra("month",month);
-        intent.putExtra("day",day);
-        startActivityForResult(intent, 1);
+        switch (v.getId()) {
+            case R.id.btnadd:
+                Intent intent = new Intent(this, Add_scheduleActivity.class);
+                intent.putExtra("ParamDate", today);
+                startActivityForResult(intent, 1);
+                break;
 
+            case R.id.btnc:
+                Intent intent2 = new Intent(this, MainActivity.class);
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivityForResult(intent2, 0);
+                break;
+        }
     }
 
     @Override

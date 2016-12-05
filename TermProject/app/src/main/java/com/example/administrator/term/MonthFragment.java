@@ -126,12 +126,11 @@ public class MonthFragment extends Fragment implements View.OnClickListener {
                     chekedyear = "" + mCal.get(Calendar.YEAR);
                     chekedmonth = "" + (mCal.get(Calendar.MONTH) + 1);
                     chekedday = dayList.get(position);
-
+                    String day= chekedyear+"/"+chekedmonth+"/"+chekedday;
                     //startActivity(new Intent(getActivity(), View_scheduleActivity.class));
                     Intent intent = new Intent(getActivity(), View_scheduleActivity.class);
-                    intent.putExtra("year", chekedyear);
-                    intent.putExtra("month", chekedmonth);
-                    intent.putExtra("day", chekedday);
+                    intent.putExtra("ParamDate", day);
+
                     startActivity(intent);
                 }
             }
@@ -241,6 +240,7 @@ public class MonthFragment extends Fragment implements View.OnClickListener {
             } else {
                 holder = (ViewHolder)convertView.getTag();
             }
+
             holder.tvItemGridView.setText("" + getItem(position));
             //해당 날짜 텍스트 컬러,배경 변경
             if (position <=6) {

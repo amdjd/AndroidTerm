@@ -1,5 +1,6 @@
 package com.example.administrator.term;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -25,5 +26,13 @@ public class Splash extends AppCompatActivity {
         ImageView myear = (ImageView) findViewById(R.id.year);
         Animation rocket_anim = AnimationUtils.loadAnimation(this, R.anim.year);
         myear.startAnimation(rocket_anim);
+
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable()  {
+            public void run() {
+                startActivity(new Intent(getApplication(), MainActivity.class));
+            }
+        }, 3000);
+
     }
 }

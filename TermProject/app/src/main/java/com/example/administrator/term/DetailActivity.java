@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -52,7 +53,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
     int mId;
     String today, time, day, month, year;
     TextView textTime, textDate, textTitle, textState, textMemo, textTime2;
-    int mYear, mMonth, mDay, mHour, nMinute;
+
     /** Called when the activity is first created. */
 
     //멀티미디어
@@ -70,10 +71,6 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        GregorianCalendar calendar = new GregorianCalendar();
-        mYear = calendar.get(Calendar.YEAR);
-        mMonth = calendar.get(Calendar.MONTH);
-        mDay= calendar.get(Calendar.DAY_OF_MONTH);
 
         textDate = (TextView) findViewById(R.id.dateText);
         textTime = (TextView) findViewById(R.id.timeText);
@@ -135,6 +132,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
             case R.id.btn1:
                 Intent intent = new Intent(this, Add_scheduleActivity.class);
                 intent.putExtra("ParamID", mId);
+
                 startActivityForResult(intent, 0);
                 break;
             case R.id.btn2:
@@ -142,13 +140,13 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
                         this);
 
                 // 제목셋팅
-                alertDialogBuilder.setTitle("프로그램 종료");
+                alertDialogBuilder.setTitle("일정 삭제");
 
                 // AlertDialog 셋팅
                 alertDialogBuilder
-                        .setMessage("프로그램을 종료할 것입니까?")
+                        .setMessage("일정을 삭제하시겠습니까?")
                         .setCancelable(false)
-                        .setPositiveButton("종료",
+                        .setPositiveButton("삭제",
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(
                                             DialogInterface dialog, int id) {
@@ -180,7 +178,12 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
                 break;
             case R.id.btn3:
                 setResult(RESULT_CANCELED);
-                finish();
+
+                Intent intent2 = new Intent(this, View_scheduleActivity.class);
+                intent2.putExtra("ParamDate", textDate.getText().toString());
+                intent2.putExtra("time", textTime.getText().toString());
+                intent2.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                startActivity(intent2);
                 break;
         }
 
@@ -317,4 +320,5 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
         }
         file.delete();    //root 삭제
     }
+
 }
