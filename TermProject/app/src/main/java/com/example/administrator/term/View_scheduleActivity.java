@@ -89,7 +89,7 @@ public class View_scheduleActivity extends AppCompatActivity implements OnItemCl
             case R.id.btnadd:
                 Intent intent = new Intent(this, Add_scheduleActivity.class);
                 intent.putExtra("ParamDate", today);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, 0);
                 break;
 
             case R.id.btnc:

@@ -156,8 +156,15 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
                                             db.execSQL("DELETE FROM today WHERE _id='" + mId + "';");
                                             mDBHelper.close();
                                         }
-                                        DeleteDir(sdPath);
-                                        finish();
+                                        File f = new File(sdPath);
+                                        if(f.isDirectory()) {
+                                            DeleteDir(sdPath);
+                                        }
+                                        Intent intent = new Intent(DetailActivity.this, View_scheduleActivity.class);
+                                        intent.putExtra("ParamDate", textDate.getText().toString());
+                                        //intent2.putExtra("time", textTime.getText().toString());
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                        startActivity(intent);
                                     }
                                 })
                         .setNegativeButton("취소",
@@ -181,7 +188,7 @@ public class DetailActivity extends AppCompatActivity implements OnClickListener
 
                 Intent intent2 = new Intent(this, View_scheduleActivity.class);
                 intent2.putExtra("ParamDate", textDate.getText().toString());
-                intent2.putExtra("time", textTime.getText().toString());
+                //intent2.putExtra("time", textTime.getText().toString());
                 intent2.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
                 startActivity(intent2);
                 break;

@@ -1,6 +1,7 @@
 package com.example.administrator.term;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
@@ -27,14 +28,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
         checkDangerousPermissions();
 
         fragmentTransaction.replace(R.id.fragment, new MonthFragment());
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
 
-
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle("월별 보기");
     }
 
     @Override
@@ -46,18 +47,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
 
         switch (item.getItemId()) {
             case R.id.add_schedule:
                 startActivity(new Intent(this, Add_scheduleActivity.class));
                 return true;
             case R.id.month_schedule:
+                actionBar.setTitle("월별 보기");
                 switchFragment(0);
                 return true;
             case R.id.week_schedule:
+                actionBar.setTitle("주별 보기");
                 switchFragment(1);
                 return true;
             case R.id.day_schedule:
+                actionBar.setTitle("일별 보기");
                 switchFragment(2);
                 return true;
             default:
@@ -67,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     protected void switchFragment(int id) {
         final FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         if (id == 0)
+
             fragmentTransaction.replace(R.id.fragment, MonthFragment);
         else if(id == 1)
             fragmentTransaction.replace(R.id.fragment, WeekFragment);

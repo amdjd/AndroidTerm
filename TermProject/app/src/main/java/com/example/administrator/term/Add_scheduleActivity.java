@@ -98,7 +98,7 @@ public class Add_scheduleActivity extends AppCompatActivity implements OnClickLi
         if (mId == -1) {
             textDate.setText(today);
             textTime.setText(time);
-            sdPath +=today+"/";
+            sdPath +=today+"/"+time+"/";
             File file = new File(sdPath);
             file.mkdirs();
         } else {
@@ -288,7 +288,15 @@ public class Add_scheduleActivity extends AppCompatActivity implements OnClickLi
                                                 mDBHelper.close();
                                             }
                                             DeleteDir(sdPath);
-                                            finish();
+                                            File f = new File(sdPath);
+                                            if(f.isDirectory()) {
+                                                DeleteDir(sdPath);
+                                            }
+                                            Intent intent = new Intent(Add_scheduleActivity.this, View_scheduleActivity.class);
+                                            intent.putExtra("ParamDate", textDate.getText().toString());
+                                            //intent2.putExtra("time", textTime.getText().toString());
+                                            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                            startActivity(intent);
                                         }
                                     })
                             .setNegativeButton("취소",
